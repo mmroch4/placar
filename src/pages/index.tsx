@@ -16,7 +16,7 @@ const Main = styled("main", {
 
   height: "100vh",
 
-  padding: "auto",
+  padding: "2rem",
 });
 
 export const getStaticProps: GetStaticProps = async () => {
