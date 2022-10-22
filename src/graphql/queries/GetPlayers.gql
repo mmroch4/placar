@@ -1,0 +1,14 @@
+query GetPlayers {
+  players {
+    id
+    publishedAt
+    name
+    nickname
+    evaluations {
+      score
+      evaluation {
+        id
+      }
+    }
+  }
+}
