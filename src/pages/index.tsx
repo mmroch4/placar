@@ -14,8 +14,6 @@ const Main = styled("main", {
   alignItems: "center",
   justifyContent: "center",
 
-  height: "100vh",
-
   padding: "2rem",
 });
 
