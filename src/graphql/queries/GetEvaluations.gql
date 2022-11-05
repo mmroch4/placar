@@ -1,0 +1,8 @@
+query GetEvaluations {
+  evaluations {
+    id
+    title
+    subject
+    madeIn
+  }
+}
