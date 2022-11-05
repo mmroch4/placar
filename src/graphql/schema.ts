@@ -1325,6 +1325,8 @@ export type Mutation = {
   createPlayer?: Maybe<Player>;
   /** Create one scheduledRelease */
   createScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Create one winnerMessage */
+  createWinnerMessage?: Maybe<WinnerMessage>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
   deleteAsset?: Maybe<Asset>;
   /** Delete one evaluation from _all_ existing stages. Returns deleted document. */
@@ -1350,12 +1352,21 @@ export type Mutation = {
   deleteManyPlayers: BatchPayload;
   /** Delete many Player documents, return deleted documents */
   deleteManyPlayersConnection: PlayerConnection;
+  /**
+   * Delete many WinnerMessage documents
+   * @deprecated Please use the new paginated many mutation (deleteManyWinnerMessagesConnection)
+   */
+  deleteManyWinnerMessages: BatchPayload;
+  /** Delete many WinnerMessage documents, return deleted documents */
+  deleteManyWinnerMessagesConnection: WinnerMessageConnection;
   /** Delete one player from _all_ existing stages. Returns deleted document. */
   deletePlayer?: Maybe<Player>;
   /** Delete and return scheduled operation */
   deleteScheduledOperation?: Maybe<ScheduledOperation>;
   /** Delete one scheduledRelease from _all_ existing stages. Returns deleted document. */
   deleteScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Delete one winnerMessage from _all_ existing stages. Returns deleted document. */
+  deleteWinnerMessage?: Maybe<WinnerMessage>;
   /** Publish one asset */
   publishAsset?: Maybe<Asset>;
   /** Publish one evaluation */
@@ -1381,20 +1392,33 @@ export type Mutation = {
   publishManyPlayers: BatchPayload;
   /** Publish many Player documents */
   publishManyPlayersConnection: PlayerConnection;
+  /**
+   * Publish many WinnerMessage documents
+   * @deprecated Please use the new paginated many mutation (publishManyWinnerMessagesConnection)
+   */
+  publishManyWinnerMessages: BatchPayload;
+  /** Publish many WinnerMessage documents */
+  publishManyWinnerMessagesConnection: WinnerMessageConnection;
   /** Publish one player */
   publishPlayer?: Maybe<Player>;
+  /** Publish one winnerMessage */
+  publishWinnerMessage?: Maybe<WinnerMessage>;
   /** Schedule to publish one asset */
   schedulePublishAsset?: Maybe<Asset>;
   /** Schedule to publish one evaluation */
   schedulePublishEvaluation?: Maybe<Evaluation>;
   /** Schedule to publish one player */
   schedulePublishPlayer?: Maybe<Player>;
+  /** Schedule to publish one winnerMessage */
+  schedulePublishWinnerMessage?: Maybe<WinnerMessage>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
   /** Unpublish one evaluation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishEvaluation?: Maybe<Evaluation>;
   /** Unpublish one player from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishPlayer?: Maybe<Player>;
+  /** Unpublish one winnerMessage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishWinnerMessage?: Maybe<WinnerMessage>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAsset?: Maybe<Asset>;
   /** Unpublish one evaluation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -1420,8 +1444,17 @@ export type Mutation = {
   unpublishManyPlayers: BatchPayload;
   /** Find many Player documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyPlayersConnection: PlayerConnection;
+  /**
+   * Unpublish many WinnerMessage documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyWinnerMessagesConnection)
+   */
+  unpublishManyWinnerMessages: BatchPayload;
+  /** Find many WinnerMessage documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyWinnerMessagesConnection: WinnerMessageConnection;
   /** Unpublish one player from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishPlayer?: Maybe<Player>;
+  /** Unpublish one winnerMessage from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishWinnerMessage?: Maybe<WinnerMessage>;
   /** Update one asset */
   updateAsset?: Maybe<Asset>;
   /** Update one evaluation */
@@ -1447,16 +1480,27 @@ export type Mutation = {
   updateManyPlayers: BatchPayload;
   /** Update many Player documents */
   updateManyPlayersConnection: PlayerConnection;
+  /**
+   * Update many winnerMessages
+   * @deprecated Please use the new paginated many mutation (updateManyWinnerMessagesConnection)
+   */
+  updateManyWinnerMessages: BatchPayload;
+  /** Update many WinnerMessage documents */
+  updateManyWinnerMessagesConnection: WinnerMessageConnection;
   /** Update one player */
   updatePlayer?: Maybe<Player>;
   /** Update one scheduledRelease */
   updateScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Update one winnerMessage */
+  updateWinnerMessage?: Maybe<WinnerMessage>;
   /** Upsert one asset */
   upsertAsset?: Maybe<Asset>;
   /** Upsert one evaluation */
   upsertEvaluation?: Maybe<Evaluation>;
   /** Upsert one player */
   upsertPlayer?: Maybe<Player>;
+  /** Upsert one winnerMessage */
+  upsertWinnerMessage?: Maybe<WinnerMessage>;
 };
 
 
@@ -1477,6 +1521,11 @@ export type MutationCreatePlayerArgs = {
 
 export type MutationCreateScheduledReleaseArgs = {
   data: ScheduledReleaseCreateInput;
+};
+
+
+export type MutationCreateWinnerMessageArgs = {
+  data: WinnerMessageCreateInput;
 };
 
 
@@ -1535,6 +1584,21 @@ export type MutationDeleteManyPlayersConnectionArgs = {
 };
 
 
+export type MutationDeleteManyWinnerMessagesArgs = {
+  where?: InputMaybe<WinnerMessageManyWhereInput>;
+};
+
+
+export type MutationDeleteManyWinnerMessagesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<WinnerMessageManyWhereInput>;
+};
+
+
 export type MutationDeletePlayerArgs = {
   where: PlayerWhereUniqueInput;
 };
@@ -1547,6 +1611,11 @@ export type MutationDeleteScheduledOperationArgs = {
 
 export type MutationDeleteScheduledReleaseArgs = {
   where: ScheduledReleaseWhereUniqueInput;
+};
+
+
+export type MutationDeleteWinnerMessageArgs = {
+  where: WinnerMessageWhereUniqueInput;
 };
 
 
@@ -1625,9 +1694,33 @@ export type MutationPublishManyPlayersConnectionArgs = {
 };
 
 
+export type MutationPublishManyWinnerMessagesArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<WinnerMessageManyWhereInput>;
+};
+
+
+export type MutationPublishManyWinnerMessagesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<WinnerMessageManyWhereInput>;
+};
+
+
 export type MutationPublishPlayerArgs = {
   to?: Array<Stage>;
   where: PlayerWhereUniqueInput;
+};
+
+
+export type MutationPublishWinnerMessageArgs = {
+  to?: Array<Stage>;
+  where: WinnerMessageWhereUniqueInput;
 };
 
 
@@ -1658,6 +1751,14 @@ export type MutationSchedulePublishPlayerArgs = {
 };
 
 
+export type MutationSchedulePublishWinnerMessageArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: WinnerMessageWhereUniqueInput;
+};
+
+
 export type MutationScheduleUnpublishAssetArgs = {
   from?: Array<Stage>;
   locales?: InputMaybe<Array<Locale>>;
@@ -1681,6 +1782,14 @@ export type MutationScheduleUnpublishPlayerArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
   where: PlayerWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishWinnerMessageArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: WinnerMessageWhereUniqueInput;
 };
 
 
@@ -1756,9 +1865,33 @@ export type MutationUnpublishManyPlayersConnectionArgs = {
 };
 
 
+export type MutationUnpublishManyWinnerMessagesArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<WinnerMessageManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyWinnerMessagesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<WinnerMessageManyWhereInput>;
+};
+
+
 export type MutationUnpublishPlayerArgs = {
   from?: Array<Stage>;
   where: PlayerWhereUniqueInput;
+};
+
+
+export type MutationUnpublishWinnerMessageArgs = {
+  from?: Array<Stage>;
+  where: WinnerMessageWhereUniqueInput;
 };
 
 
@@ -1825,6 +1958,23 @@ export type MutationUpdateManyPlayersConnectionArgs = {
 };
 
 
+export type MutationUpdateManyWinnerMessagesArgs = {
+  data: WinnerMessageUpdateManyInput;
+  where?: InputMaybe<WinnerMessageManyWhereInput>;
+};
+
+
+export type MutationUpdateManyWinnerMessagesConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: WinnerMessageUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<WinnerMessageManyWhereInput>;
+};
+
+
 export type MutationUpdatePlayerArgs = {
   data: PlayerUpdateInput;
   where: PlayerWhereUniqueInput;
@@ -1834,6 +1984,12 @@ export type MutationUpdatePlayerArgs = {
 export type MutationUpdateScheduledReleaseArgs = {
   data: ScheduledReleaseUpdateInput;
   where: ScheduledReleaseWhereUniqueInput;
+};
+
+
+export type MutationUpdateWinnerMessageArgs = {
+  data: WinnerMessageUpdateInput;
+  where: WinnerMessageWhereUniqueInput;
 };
 
 
@@ -1852,6 +2008,12 @@ export type MutationUpsertEvaluationArgs = {
 export type MutationUpsertPlayerArgs = {
   upsert: PlayerUpsertInput;
   where: PlayerWhereUniqueInput;
+};
+
+
+export type MutationUpsertWinnerMessageArgs = {
+  upsert: WinnerMessageUpsertInput;
+  where: WinnerMessageWhereUniqueInput;
 };
 
 /** An object with an ID */
@@ -1903,6 +2065,7 @@ export type Player = Node & {
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
+  winnerMessage: Array<WinnerMessage>;
 };
 
 
@@ -1957,6 +2120,18 @@ export type PlayerUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
+
+export type PlayerWinnerMessageArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<WinnerMessageOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<WinnerMessageWhereInput>;
+};
+
 export type PlayerConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
   position?: InputMaybe<ConnectPositionInput>;
@@ -1980,6 +2155,7 @@ export type PlayerCreateInput = {
   name: Scalars['String'];
   nickname: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
+  winnerMessage?: InputMaybe<WinnerMessageCreateManyInlineInput>;
 };
 
 export type PlayerCreateManyInlineInput = {
@@ -2455,6 +2631,9 @@ export type PlayerManyWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   updatedBy?: InputMaybe<UserWhereInput>;
+  winnerMessage_every?: InputMaybe<WinnerMessageWhereInput>;
+  winnerMessage_none?: InputMaybe<WinnerMessageWhereInput>;
+  winnerMessage_some?: InputMaybe<WinnerMessageWhereInput>;
 };
 
 export enum PlayerOrderByInput {
@@ -2476,6 +2655,7 @@ export type PlayerUpdateInput = {
   evaluations?: InputMaybe<PlayerEvaluationUpdateManyInlineInput>;
   name?: InputMaybe<Scalars['String']>;
   nickname?: InputMaybe<Scalars['String']>;
+  winnerMessage?: InputMaybe<WinnerMessageUpdateManyInlineInput>;
 };
 
 export type PlayerUpdateManyInlineInput = {
@@ -2673,6 +2853,9 @@ export type PlayerWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   updatedBy?: InputMaybe<UserWhereInput>;
+  winnerMessage_every?: InputMaybe<WinnerMessageWhereInput>;
+  winnerMessage_none?: InputMaybe<WinnerMessageWhereInput>;
+  winnerMessage_some?: InputMaybe<WinnerMessageWhereInput>;
 };
 
 /** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
@@ -2747,6 +2930,14 @@ export type Query = {
   users: Array<User>;
   /** Retrieve multiple users using the Relay connection interface */
   usersConnection: UserConnection;
+  /** Retrieve a single winnerMessage */
+  winnerMessage?: Maybe<WinnerMessage>;
+  /** Retrieve document version */
+  winnerMessageVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple winnerMessages */
+  winnerMessages: Array<WinnerMessage>;
+  /** Retrieve multiple winnerMessages using the Relay connection interface */
+  winnerMessagesConnection: WinnerMessageConnection;
 };
 
 
@@ -2969,6 +3160,44 @@ export type QueryUsersConnectionArgs = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+
+export type QueryWinnerMessageArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: WinnerMessageWhereUniqueInput;
+};
+
+
+export type QueryWinnerMessageVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryWinnerMessagesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<WinnerMessageOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<WinnerMessageWhereInput>;
+};
+
+
+export type QueryWinnerMessagesConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<WinnerMessageOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<WinnerMessageWhereInput>;
+};
+
 /** Representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
 export type Rgba = {
   __typename?: 'RGBA';
@@ -3076,7 +3305,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Evaluation | Player;
+export type ScheduledOperationAffectedDocument = Asset | Evaluation | Player | WinnerMessage;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -4424,6 +4653,442 @@ export type VersionWhereInput = {
   stage: Stage;
 };
 
+export type WinnerMessage = Node & {
+  __typename?: 'WinnerMessage';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<WinnerMessage>;
+  /** List of WinnerMessage versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  message: Scalars['String'];
+  owner?: Maybe<Player>;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type WinnerMessageCreatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type WinnerMessageDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type WinnerMessageHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type WinnerMessageOwnerArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type WinnerMessagePublishedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type WinnerMessageScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type WinnerMessageUpdatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type WinnerMessageConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: WinnerMessageWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type WinnerMessageConnection = {
+  __typename?: 'WinnerMessageConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<WinnerMessageEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type WinnerMessageCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  message: Scalars['String'];
+  owner?: InputMaybe<PlayerCreateOneInlineInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type WinnerMessageCreateManyInlineInput = {
+  /** Connect multiple existing WinnerMessage documents */
+  connect?: InputMaybe<Array<WinnerMessageWhereUniqueInput>>;
+  /** Create and connect multiple existing WinnerMessage documents */
+  create?: InputMaybe<Array<WinnerMessageCreateInput>>;
+};
+
+export type WinnerMessageCreateOneInlineInput = {
+  /** Connect one existing WinnerMessage document */
+  connect?: InputMaybe<WinnerMessageWhereUniqueInput>;
+  /** Create and connect one WinnerMessage document */
+  create?: InputMaybe<WinnerMessageCreateInput>;
+};
+
+/** An edge in a connection. */
+export type WinnerMessageEdge = {
+  __typename?: 'WinnerMessageEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: WinnerMessage;
+};
+
+/** Identifies documents */
+export type WinnerMessageManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<WinnerMessageWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<WinnerMessageWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<WinnerMessageWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<WinnerMessageWhereStageInput>;
+  documentInStages_none?: InputMaybe<WinnerMessageWhereStageInput>;
+  documentInStages_some?: InputMaybe<WinnerMessageWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  message?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  message_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  message_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  message_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  message_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  message_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  message_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  message_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  message_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  message_starts_with?: InputMaybe<Scalars['String']>;
+  owner?: InputMaybe<PlayerWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum WinnerMessageOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  MessageAsc = 'message_ASC',
+  MessageDesc = 'message_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type WinnerMessageUpdateInput = {
+  message?: InputMaybe<Scalars['String']>;
+  owner?: InputMaybe<PlayerUpdateOneInlineInput>;
+};
+
+export type WinnerMessageUpdateManyInlineInput = {
+  /** Connect multiple existing WinnerMessage documents */
+  connect?: InputMaybe<Array<WinnerMessageConnectInput>>;
+  /** Create and connect multiple WinnerMessage documents */
+  create?: InputMaybe<Array<WinnerMessageCreateInput>>;
+  /** Delete multiple WinnerMessage documents */
+  delete?: InputMaybe<Array<WinnerMessageWhereUniqueInput>>;
+  /** Disconnect multiple WinnerMessage documents */
+  disconnect?: InputMaybe<Array<WinnerMessageWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing WinnerMessage documents */
+  set?: InputMaybe<Array<WinnerMessageWhereUniqueInput>>;
+  /** Update multiple WinnerMessage documents */
+  update?: InputMaybe<Array<WinnerMessageUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple WinnerMessage documents */
+  upsert?: InputMaybe<Array<WinnerMessageUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type WinnerMessageUpdateManyInput = {
+  message?: InputMaybe<Scalars['String']>;
+};
+
+export type WinnerMessageUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: WinnerMessageUpdateManyInput;
+  /** Document search */
+  where: WinnerMessageWhereInput;
+};
+
+export type WinnerMessageUpdateOneInlineInput = {
+  /** Connect existing WinnerMessage document */
+  connect?: InputMaybe<WinnerMessageWhereUniqueInput>;
+  /** Create and connect one WinnerMessage document */
+  create?: InputMaybe<WinnerMessageCreateInput>;
+  /** Delete currently connected WinnerMessage document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected WinnerMessage document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single WinnerMessage document */
+  update?: InputMaybe<WinnerMessageUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single WinnerMessage document */
+  upsert?: InputMaybe<WinnerMessageUpsertWithNestedWhereUniqueInput>;
+};
+
+export type WinnerMessageUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: WinnerMessageUpdateInput;
+  /** Unique document search */
+  where: WinnerMessageWhereUniqueInput;
+};
+
+export type WinnerMessageUpsertInput = {
+  /** Create document if it didn't exist */
+  create: WinnerMessageCreateInput;
+  /** Update document if it exists */
+  update: WinnerMessageUpdateInput;
+};
+
+export type WinnerMessageUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: WinnerMessageUpsertInput;
+  /** Unique document search */
+  where: WinnerMessageWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type WinnerMessageWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Identifies documents */
+export type WinnerMessageWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<WinnerMessageWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<WinnerMessageWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<WinnerMessageWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<WinnerMessageWhereStageInput>;
+  documentInStages_none?: InputMaybe<WinnerMessageWhereStageInput>;
+  documentInStages_some?: InputMaybe<WinnerMessageWhereStageInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  message?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  message_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  message_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  message_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  message_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  message_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  message_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  message_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  message_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  message_starts_with?: InputMaybe<Scalars['String']>;
+  owner?: InputMaybe<PlayerWhereInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type WinnerMessageWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<WinnerMessageWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<WinnerMessageWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<WinnerMessageWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<WinnerMessageWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References WinnerMessage record uniquely */
+export type WinnerMessageWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
 export enum _FilterKind {
   And = 'AND',
   Not = 'NOT',
@@ -4503,12 +5168,98 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type GetCurrentWinnerMessageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCurrentWinnerMessageQuery = { __typename?: 'Query', winnerMessages: Array<{ __typename?: 'WinnerMessage', id: string, message: string, owner?: { __typename?: 'Player', id: string, nickname: string } | null }> };
+
+export type GetEvaluationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetEvaluationsQuery = { __typename?: 'Query', evaluations: Array<{ __typename?: 'Evaluation', id: string, title: string, subject: Subject, madeIn: any }> };
+
 export type GetPlayersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetPlayersQuery = { __typename?: 'Query', players: Array<{ __typename?: 'Player', id: string, publishedAt?: any | null, name: string, nickname: string, evaluations: Array<{ __typename?: 'PlayerEvaluation', score: number, evaluation?: { __typename?: 'Evaluation', id: string } | null }> }> };
 
 
+export const GetCurrentWinnerMessageDocument = gql`
+    query GetCurrentWinnerMessage {
+  winnerMessages(orderBy: publishedAt_DESC, first: 1) {
+    id
+    message
+    owner {
+      id
+      nickname
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetCurrentWinnerMessageQuery__
+ *
+ * To run a query within a React component, call `useGetCurrentWinnerMessageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCurrentWinnerMessageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCurrentWinnerMessageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCurrentWinnerMessageQuery(baseOptions?: Apollo.QueryHookOptions<GetCurrentWinnerMessageQuery, GetCurrentWinnerMessageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetCurrentWinnerMessageQuery, GetCurrentWinnerMessageQueryVariables>(GetCurrentWinnerMessageDocument, options);
+      }
+export function useGetCurrentWinnerMessageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCurrentWinnerMessageQuery, GetCurrentWinnerMessageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetCurrentWinnerMessageQuery, GetCurrentWinnerMessageQueryVariables>(GetCurrentWinnerMessageDocument, options);
+        }
+export type GetCurrentWinnerMessageQueryHookResult = ReturnType<typeof useGetCurrentWinnerMessageQuery>;
+export type GetCurrentWinnerMessageLazyQueryHookResult = ReturnType<typeof useGetCurrentWinnerMessageLazyQuery>;
+export type GetCurrentWinnerMessageQueryResult = Apollo.QueryResult<GetCurrentWinnerMessageQuery, GetCurrentWinnerMessageQueryVariables>;
+export const GetEvaluationsDocument = gql`
+    query GetEvaluations {
+  evaluations {
+    id
+    title
+    subject
+    madeIn
+  }
+}
+    `;
+
+/**
+ * __useGetEvaluationsQuery__
+ *
+ * To run a query within a React component, call `useGetEvaluationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEvaluationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEvaluationsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetEvaluationsQuery(baseOptions?: Apollo.QueryHookOptions<GetEvaluationsQuery, GetEvaluationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetEvaluationsQuery, GetEvaluationsQueryVariables>(GetEvaluationsDocument, options);
+      }
+export function useGetEvaluationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetEvaluationsQuery, GetEvaluationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetEvaluationsQuery, GetEvaluationsQueryVariables>(GetEvaluationsDocument, options);
+        }
+export type GetEvaluationsQueryHookResult = ReturnType<typeof useGetEvaluationsQuery>;
+export type GetEvaluationsLazyQueryHookResult = ReturnType<typeof useGetEvaluationsLazyQuery>;
+export type GetEvaluationsQueryResult = Apollo.QueryResult<GetEvaluationsQuery, GetEvaluationsQueryVariables>;
 export const GetPlayersDocument = gql`
     query GetPlayers {
   players {
