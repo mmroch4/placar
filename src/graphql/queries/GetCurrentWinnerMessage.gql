@@ -1,0 +1,10 @@
+query GetCurrentWinnerMessage {
+  winnerMessages(orderBy: publishedAt_DESC, first: 1) {
+    id
+    message
+    owner {
+      id
+      nickname
+    }
+  }
+}
