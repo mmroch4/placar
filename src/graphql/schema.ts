@@ -5176,7 +5176,7 @@ export type GetCurrentWinnerMessageQuery = { __typename?: 'Query', winnerMessage
 export type GetEvaluationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetEvaluationsQuery = { __typename?: 'Query', evaluations: Array<{ __typename?: 'Evaluation', id: string, title: string, subject: Subject, madeIn: any }> };
+export type GetEvaluationsQuery = { __typename?: 'Query', evaluations: Array<{ __typename?: 'Evaluation', id: string, title: string, subject: Subject, madeIn: any, publishedAt?: any | null }> };
 
 export type GetPlayersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5225,11 +5225,12 @@ export type GetCurrentWinnerMessageLazyQueryHookResult = ReturnType<typeof useGe
 export type GetCurrentWinnerMessageQueryResult = Apollo.QueryResult<GetCurrentWinnerMessageQuery, GetCurrentWinnerMessageQueryVariables>;
 export const GetEvaluationsDocument = gql`
     query GetEvaluations {
-  evaluations {
+  evaluations(orderBy: publishedAt_DESC) {
     id
     title
     subject
     madeIn
+    publishedAt
   }
 }
     `;
