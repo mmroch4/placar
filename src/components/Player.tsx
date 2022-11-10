@@ -96,7 +96,7 @@ const Position = styled("span", {
   padding: "0.5rem",
 
   border: "1px solid $yellow9",
-  borderRadius: 99999,
+  borderRadius: "50%",
 
   color: "$yellow12",
   fontWeight: "bold",
@@ -198,7 +198,6 @@ export const Player = ({
   return (
     <Container>
       <Position>{position}º</Position>
-
 
       <InnerContainer>
         <TooltipPrimitive.Provider delayDuration={500} skipDelayDuration={500}>
