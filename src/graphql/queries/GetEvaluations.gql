@@ -1,8 +1,9 @@
 query GetEvaluations {
-  evaluations {
+  evaluations(orderBy: publishedAt_DESC) {
     id
     title
     subject
     madeIn
+    publishedAt
   }
 }
