@@ -90,10 +90,6 @@ const Score = styled("span", {
 
 const Name = styled("h2", {});
 
-const Sidebar = styled("div", {
-  position: "relative",
-});
-
 const Position = styled("span", {
   background: "$yellow9",
 
@@ -104,19 +100,6 @@ const Position = styled("span", {
 
   color: "$yellow12",
   fontWeight: "bold",
-});
-
-const Line = styled("div", {
-  position: "absolute",
-  left: "1rem",
-  bottom: "-60%",
-  zIndex: -1,
-
-  height: "100%",
-
-  background: "$gray7",
-
-  border: "1px solid $gray7",
 });
 
 const Comment = styled("div", {
@@ -216,7 +199,6 @@ export const Player = ({
     <Container>
       <Position>{position}º</Position>
 
-      <Line className="line" />
 
       <InnerContainer>
         <TooltipPrimitive.Provider delayDuration={500} skipDelayDuration={500}>
