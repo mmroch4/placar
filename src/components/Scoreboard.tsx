@@ -9,10 +9,6 @@ const Container = styled("section", {
   justifyContent: "center",
 
   gap: "1rem",
-
-  "& div:last-child .line": {
-    display: "none",
-  },
 });
 
 interface Props {
