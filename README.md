@@ -4,8 +4,8 @@
 
 - [x] - current round
 - [x] - last evaluation
-- [] - most rated evaluation (all)
-- [] - least rated evaluation (all)
+- [x] - most rated evaluation (all)
+- [x] - least rated evaluation (all)
 - [] - players statistics
   - [] - average evaluation score
   - [] - best evaluation score

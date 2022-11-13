@@ -1,6 +1,7 @@
 import type { GetStaticProps } from "next";
 import { NextPage } from "next";
 import Head from "next/head";
+import React from "react";
 import { Banner } from "../components/Banner";
 import { Main } from "../components/Main";
 import { Nav } from "../components/Nav";
@@ -8,12 +9,19 @@ import {
   Evaluation as IEvaluation,
   GetCurrentWinnerMessageDocument,
   GetCurrentWinnerMessageQuery as IGetCurrentWinnerMessageQuery,
+  GetEvaluationDocument,
+  GetEvaluationQuery as IGetEvaluationQuery,
   GetEvaluationsDocument,
   GetEvaluationsQuery as IGetEvaluationsQuery,
+  GetPlayersDocument,
+  GetPlayersQuery as IGetPlayersQuery,
+  Player as IPlayer,
   WinnerMessage as IWinnerMessage,
 } from "../graphql/schema";
 import { client } from "../lib/apollo";
 import { styled } from "../stitches/config";
+import { getLeastRatedEvaluationId } from "../utils/getLeastRatedEvaluation";
+import { getMostRatedEvaluationId } from "../utils/getMostRatedEvaluationId";
 
 const Section = styled("section", {
   width: "100%",
@@ -39,6 +47,12 @@ const Table = styled("table", {
 
 export const getStaticProps: GetStaticProps = async () => {
   const {
+    data: { players },
+  } = await client.query<IGetPlayersQuery>({
+    query: GetPlayersDocument,
+  });
+
+  const {
     data: { evaluations },
   } = await client.query<IGetEvaluationsQuery>({
     query: GetEvaluationsDocument,
@@ -54,9 +68,36 @@ export const getStaticProps: GetStaticProps = async () => {
     return new Date(b.madeIn).getTime() - new Date(a.madeIn).getTime();
   })[0];
 
+  const mostRatedEvaluationId = getMostRatedEvaluationId(players as IPlayer[]);
+
+  const leastRatedEvaluationId = getLeastRatedEvaluationId(
+    players as IPlayer[]
+  );
+
+  const {
+    data: { evaluation: leastRatedEvaluation },
+  } = await client.query<IGetEvaluationQuery>({
+    query: GetEvaluationDocument,
+    variables: {
+      id: leastRatedEvaluationId,
+    },
+  });
+
+  const {
+    data: { evaluation: mostRatedEvaluation },
+  } = await client.query<IGetEvaluationQuery>({
+    query: GetEvaluationDocument,
+    variables: {
+      id: mostRatedEvaluationId,
+    },
+  });
+
   return {
     props: {
+      players,
       evaluations,
+      leastRatedEvaluation,
+      mostRatedEvaluation,
       round: evaluations.length,
       lastEvaluation,
       currentWinnerMessage,
@@ -66,11 +107,22 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const DetailsPage: NextPage<{
+  players: IPlayer[];
   evaluations: IEvaluation[];
+  leastRatedEvaluation: IEvaluation;
+  mostRatedEvaluation: IEvaluation;
   currentWinnerMessage: IWinnerMessage[];
   round: number;
   lastEvaluation: IEvaluation;
-}> = ({ currentWinnerMessage, evaluations, lastEvaluation, round }) => {
+}> = ({
+  currentWinnerMessage,
+  evaluations,
+  players,
+  leastRatedEvaluation,
+  mostRatedEvaluation,
+  lastEvaluation,
+  round,
+}) => {
   const currentMessage = currentWinnerMessage[0];
 
   return (
@@ -111,7 +163,7 @@ const DetailsPage: NextPage<{
               <td>Avaliação mais apurada</td>
 
               <td>
-                <strong>...</strong>
+                <strong>{mostRatedEvaluation.title}</strong>
               </td>
             </tr>
 
@@ -119,11 +171,41 @@ const DetailsPage: NextPage<{
               <td>Avaliação menos apurada</td>
 
               <td>
-                <strong>...</strong>
+                <strong>{leastRatedEvaluation.title}</strong>
               </td>
             </tr>
           </Table>
         </Section>
+
+        {/* <Section>
+          <h2>Jogadores</h2>
+
+          <br />
+
+          {players.map((player) => {
+            return (
+              <React.Fragment key={player.id}>
+                <h3>{player.name}</h3>
+
+                <Table>
+                  {player.evaluations.map((evaluation) => {
+                    return (
+                      <tr key={evaluation.id}>
+                        <td>{evaluation.evaluation?.title}</td>
+
+                        <td>
+                          <strong>{evaluation.score}</strong>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </Table>
+
+                <br />
+              </React.Fragment>
+            );
+          })}
+        </Section> */}
       </Main>
     </>
   );
