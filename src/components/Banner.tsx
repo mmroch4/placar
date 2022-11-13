@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import Marquee from "react-fast-marquee";
 import { styled } from "../stitches/config";
 
 const Container = styled("div", {
@@ -19,11 +18,5 @@ interface Props {
 }
 
 export const Banner = ({ children }: Props) => {
-  return (
-    <Container>
-      <Marquee gradient={false} speed={30}>
-        {children}
-      </Marquee>
-    </Container>
-  );
+  return <Container>{children}</Container>;
 };
