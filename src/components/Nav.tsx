@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { styled } from "../stitches/config";
 
 const Container = styled("nav", {});
@@ -38,20 +37,22 @@ const Item = styled(Link, {
   },
 });
 
-export const Nav = () => {
-  const { pathname } = useRouter();
+interface Props {
+  path: "/" | "/details";
+}
 
+export const Nav = ({ path }: Props) => {
   return (
     <Container>
       <List>
         <li>
-          <Item href="/" active={pathname === "/"}>
+          <Item href="/" active={path === "/"}>
             Placar
           </Item>
         </li>
 
         <li>
-          <Item href="/details" active={pathname === "/details"}>
+          <Item href="/details" active={path === "/details"}>
             Detalhes
           </Item>
         </li>

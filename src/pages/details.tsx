@@ -85,7 +85,7 @@ const DetailsPage: NextPage<{
       </Banner>
 
       <Main>
-        <Nav />
+        <Nav path="/details" />
 
         <Section>
           <h3>Geral</h3>

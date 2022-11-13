@@ -51,7 +51,7 @@ const HomePage: NextPage<{
       </Banner>
 
       <Main>
-        <Nav />
+        <Nav path="/" />
 
         <Scoreboard players={players} />
       </Main>
