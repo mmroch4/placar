@@ -2186,7 +2186,7 @@ export type PlayerEvaluation = {
   evaluation?: Maybe<Evaluation>;
   /** The unique identifier */
   id: Scalars['ID'];
-  score: Scalars['Int'];
+  score: Scalars['Float'];
   /** System stage field */
   stage: Stage;
 };
@@ -2215,7 +2215,7 @@ export type PlayerEvaluationConnection = {
 
 export type PlayerEvaluationCreateInput = {
   evaluation?: InputMaybe<EvaluationCreateOneInlineInput>;
-  score: Scalars['Int'];
+  score: Scalars['Float'];
 };
 
 export type PlayerEvaluationCreateManyInlineInput = {
@@ -2274,21 +2274,21 @@ export type PlayerEvaluationManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  score?: InputMaybe<Scalars['Int']>;
+  score?: InputMaybe<Scalars['Float']>;
   /** All values greater than the given value. */
-  score_gt?: InputMaybe<Scalars['Int']>;
+  score_gt?: InputMaybe<Scalars['Float']>;
   /** All values greater than or equal the given value. */
-  score_gte?: InputMaybe<Scalars['Int']>;
+  score_gte?: InputMaybe<Scalars['Float']>;
   /** All values that are contained in given list. */
-  score_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  score_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
   /** All values less than the given value. */
-  score_lt?: InputMaybe<Scalars['Int']>;
+  score_lt?: InputMaybe<Scalars['Float']>;
   /** All values less than or equal the given value. */
-  score_lte?: InputMaybe<Scalars['Int']>;
+  score_lte?: InputMaybe<Scalars['Float']>;
   /** All values that are not equal to given value. */
-  score_not?: InputMaybe<Scalars['Int']>;
+  score_not?: InputMaybe<Scalars['Float']>;
   /** All values that are not contained in given list. */
-  score_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  score_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
 export enum PlayerEvaluationOrderByInput {
@@ -2380,7 +2380,7 @@ export type PlayerEvaluationParentWhereUniqueInput = {
 
 export type PlayerEvaluationUpdateInput = {
   evaluation?: InputMaybe<EvaluationUpdateOneInlineInput>;
-  score?: InputMaybe<Scalars['Int']>;
+  score?: InputMaybe<Scalars['Float']>;
 };
 
 export type PlayerEvaluationUpdateManyInlineInput = {
@@ -2395,7 +2395,7 @@ export type PlayerEvaluationUpdateManyInlineInput = {
 };
 
 export type PlayerEvaluationUpdateManyInput = {
-  score?: InputMaybe<Scalars['Int']>;
+  score?: InputMaybe<Scalars['Float']>;
 };
 
 export type PlayerEvaluationUpdateManyWithNestedWhereInput = {
@@ -2485,21 +2485,21 @@ export type PlayerEvaluationWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  score?: InputMaybe<Scalars['Int']>;
+  score?: InputMaybe<Scalars['Float']>;
   /** All values greater than the given value. */
-  score_gt?: InputMaybe<Scalars['Int']>;
+  score_gt?: InputMaybe<Scalars['Float']>;
   /** All values greater than or equal the given value. */
-  score_gte?: InputMaybe<Scalars['Int']>;
+  score_gte?: InputMaybe<Scalars['Float']>;
   /** All values that are contained in given list. */
-  score_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  score_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
   /** All values less than the given value. */
-  score_lt?: InputMaybe<Scalars['Int']>;
+  score_lt?: InputMaybe<Scalars['Float']>;
   /** All values less than or equal the given value. */
-  score_lte?: InputMaybe<Scalars['Int']>;
+  score_lte?: InputMaybe<Scalars['Float']>;
   /** All values that are not equal to given value. */
-  score_not?: InputMaybe<Scalars['Int']>;
+  score_not?: InputMaybe<Scalars['Float']>;
   /** All values that are not contained in given list. */
-  score_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  score_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
 };
 
 /** References PlayerEvaluation record uniquely */
@@ -4225,11 +4225,10 @@ export enum Stage {
 }
 
 export enum Subject {
-  Bio = 'BIO',
+  Biogeo = 'BIOGEO',
   Edf = 'EDF',
   Fil = 'FIL',
   Fq = 'FQ',
-  Geo = 'GEO',
   Ing = 'ING',
   Mat = 'MAT',
   Port = 'PORT'
@@ -5173,6 +5172,13 @@ export type GetCurrentWinnerMessageQueryVariables = Exact<{ [key: string]: never
 
 export type GetCurrentWinnerMessageQuery = { __typename?: 'Query', winnerMessages: Array<{ __typename?: 'WinnerMessage', id: string, message: string, owner?: { __typename?: 'Player', id: string, nickname: string } | null }> };
 
+export type GetEvaluationQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type GetEvaluationQuery = { __typename?: 'Query', evaluation?: { __typename?: 'Evaluation', id: string, title: string, subject: Subject, madeIn: any } | null };
+
 export type GetEvaluationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5181,7 +5187,7 @@ export type GetEvaluationsQuery = { __typename?: 'Query', evaluations: Array<{ _
 export type GetPlayersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPlayersQuery = { __typename?: 'Query', players: Array<{ __typename?: 'Player', id: string, publishedAt?: any | null, name: string, nickname: string, evaluations: Array<{ __typename?: 'PlayerEvaluation', score: number, evaluation?: { __typename?: 'Evaluation', id: string } | null }> }> };
+export type GetPlayersQuery = { __typename?: 'Query', players: Array<{ __typename?: 'Player', id: string, name: string, nickname: string, publishedAt?: any | null, evaluations: Array<{ __typename?: 'PlayerEvaluation', score: number, id: string, evaluation?: { __typename?: 'Evaluation', id: string, madeIn: any, title: string, subject: Subject } | null }> }> };
 
 
 export const GetCurrentWinnerMessageDocument = gql`
@@ -5223,6 +5229,44 @@ export function useGetCurrentWinnerMessageLazyQuery(baseOptions?: Apollo.LazyQue
 export type GetCurrentWinnerMessageQueryHookResult = ReturnType<typeof useGetCurrentWinnerMessageQuery>;
 export type GetCurrentWinnerMessageLazyQueryHookResult = ReturnType<typeof useGetCurrentWinnerMessageLazyQuery>;
 export type GetCurrentWinnerMessageQueryResult = Apollo.QueryResult<GetCurrentWinnerMessageQuery, GetCurrentWinnerMessageQueryVariables>;
+export const GetEvaluationDocument = gql`
+    query GetEvaluation($id: ID) {
+  evaluation(where: {id: $id}) {
+    id
+    title
+    subject
+    madeIn
+  }
+}
+    `;
+
+/**
+ * __useGetEvaluationQuery__
+ *
+ * To run a query within a React component, call `useGetEvaluationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEvaluationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEvaluationQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetEvaluationQuery(baseOptions?: Apollo.QueryHookOptions<GetEvaluationQuery, GetEvaluationQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetEvaluationQuery, GetEvaluationQueryVariables>(GetEvaluationDocument, options);
+      }
+export function useGetEvaluationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetEvaluationQuery, GetEvaluationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetEvaluationQuery, GetEvaluationQueryVariables>(GetEvaluationDocument, options);
+        }
+export type GetEvaluationQueryHookResult = ReturnType<typeof useGetEvaluationQuery>;
+export type GetEvaluationLazyQueryHookResult = ReturnType<typeof useGetEvaluationLazyQuery>;
+export type GetEvaluationQueryResult = Apollo.QueryResult<GetEvaluationQuery, GetEvaluationQueryVariables>;
 export const GetEvaluationsDocument = gql`
     query GetEvaluations {
   evaluations(orderBy: publishedAt_DESC) {
@@ -5265,13 +5309,17 @@ export const GetPlayersDocument = gql`
     query GetPlayers {
   players {
     id
-    publishedAt
     name
     nickname
+    publishedAt
     evaluations {
       score
+      id
       evaluation {
         id
+        madeIn
+        title
+        subject
       }
     }
   }

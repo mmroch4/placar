@@ -14613,7 +14613,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -14774,7 +14774,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -15146,7 +15146,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -15158,7 +15158,7 @@
             "description": "All values greater than the given value.",
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -15170,7 +15170,7 @@
             "description": "All values greater than or equal the given value.",
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -15185,7 +15185,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -15198,7 +15198,7 @@
             "description": "All values less than the given value.",
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -15210,7 +15210,7 @@
             "description": "All values less than or equal the given value.",
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -15222,7 +15222,7 @@
             "description": "All values that are not equal to given value.",
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -15237,7 +15237,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -15828,7 +15828,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -15942,7 +15942,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -16510,7 +16510,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -16522,7 +16522,7 @@
             "description": "All values greater than the given value.",
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -16534,7 +16534,7 @@
             "description": "All values greater than or equal the given value.",
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -16549,7 +16549,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -16562,7 +16562,7 @@
             "description": "All values less than the given value.",
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -16574,7 +16574,7 @@
             "description": "All values less than or equal the given value.",
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -16586,7 +16586,7 @@
             "description": "All values that are not equal to given value.",
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -16601,7 +16601,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "Int",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -29019,7 +29019,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "BIO",
+            "name": "BIOGEO",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -29038,12 +29038,6 @@
           },
           {
             "name": "FQ",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "GEO",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null

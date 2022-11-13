@@ -1,0 +1,8 @@
+query GetEvaluation($id: ID) {
+  evaluation(where: { id: $id }) {
+    id
+    title
+    subject
+    madeIn
+  }
+}

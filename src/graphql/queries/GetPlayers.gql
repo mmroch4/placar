@@ -1,13 +1,17 @@
 query GetPlayers {
   players {
     id
-    publishedAt
     name
     nickname
+    publishedAt
     evaluations {
       score
+      id
       evaluation {
         id
+        madeIn
+        title
+        subject
       }
     }
   }
