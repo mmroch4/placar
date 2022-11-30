@@ -45,7 +45,7 @@ const Table = styled("table", {
 
 const Players = styled("div", {
   display: "flex",
-  flexDirection: "row",
+  flexDirection: "column",
   gap: "1rem",
 
   marginBlock: "0.5rem",
