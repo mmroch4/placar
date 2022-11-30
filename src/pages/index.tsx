@@ -45,11 +45,6 @@ const HomePage: NextPage<{
         <title>Placar</title>
       </Head>
 
-      <Banner>
-        &#34;{currentMessage.message}&#34; - {currentMessage.owner?.nickname},{" "}
-        {new Date().getFullYear()}
-      </Banner>
-
       <Main>
         <Nav path="/" />
 

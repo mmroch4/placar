@@ -38,7 +38,7 @@ const Item = styled(Link, {
 });
 
 interface Props {
-  path: "/" | "/details";
+  path?: "/" | "/details";
 }
 
 export const Nav = ({ path }: Props) => {

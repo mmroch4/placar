@@ -1,14 +1,15 @@
 import type { GetStaticProps } from "next";
 import { NextPage } from "next";
 import Head from "next/head";
-import React from "react";
-import { Banner } from "../components/Banner";
+import Link from "next/link";
 import { Main } from "../components/Main";
 import { Nav } from "../components/Nav";
+import { getLastEvaluation } from "../functions/analytics/getLastEvaluation";
+import { getLeastRatedEvaluationId } from "../functions/analytics/getLeastRatedEvaluation";
+import { getMostRatedEvaluationId } from "../functions/analytics/getMostRatedEvaluationId";
+import { getPlayerName } from "../functions/getPlayerName";
 import {
   Evaluation as IEvaluation,
-  GetCurrentWinnerMessageDocument,
-  GetCurrentWinnerMessageQuery as IGetCurrentWinnerMessageQuery,
   GetEvaluationDocument,
   GetEvaluationQuery as IGetEvaluationQuery,
   GetEvaluationsDocument,
@@ -16,12 +17,9 @@ import {
   GetPlayersDocument,
   GetPlayersQuery as IGetPlayersQuery,
   Player as IPlayer,
-  WinnerMessage as IWinnerMessage,
 } from "../graphql/schema";
 import { client } from "../lib/apollo";
 import { styled } from "../stitches/config";
-import { getLeastRatedEvaluationId } from "../utils/getLeastRatedEvaluation";
-import { getMostRatedEvaluationId } from "../utils/getMostRatedEvaluationId";
 
 const Section = styled("section", {
   width: "100%",
@@ -45,6 +43,24 @@ const Table = styled("table", {
   },
 });
 
+const Players = styled("div", {
+  display: "flex",
+  flexDirection: "row",
+  gap: "1rem",
+
+  marginBlock: "0.5rem",
+});
+
+const Player = styled(Link, {
+  color: "$gray12",
+
+  textDecoration: "none",
+
+  "&:hover": {
+    textDecoration: "underline",
+  },
+});
+
 export const getStaticProps: GetStaticProps = async () => {
   const {
     data: { players },
@@ -58,15 +74,7 @@ export const getStaticProps: GetStaticProps = async () => {
     query: GetEvaluationsDocument,
   });
 
-  const {
-    data: { winnerMessages: currentWinnerMessage },
-  } = await client.query<IGetCurrentWinnerMessageQuery>({
-    query: GetCurrentWinnerMessageDocument,
-  });
-
-  const lastEvaluation = [...evaluations].sort((a, b) => {
-    return new Date(b.madeIn).getTime() - new Date(a.madeIn).getTime();
-  })[0];
+  const lastEvaluation = getLastEvaluation(evaluations as IEvaluation[]);
 
   const mostRatedEvaluationId = getMostRatedEvaluationId(players as IPlayer[]);
 
@@ -100,7 +108,6 @@ export const getStaticProps: GetStaticProps = async () => {
       mostRatedEvaluation,
       round: evaluations.length,
       lastEvaluation,
-      currentWinnerMessage,
     },
     revalidate: 60 * 10, // 10 minutes
   };
@@ -111,11 +118,9 @@ const DetailsPage: NextPage<{
   evaluations: IEvaluation[];
   leastRatedEvaluation: IEvaluation;
   mostRatedEvaluation: IEvaluation;
-  currentWinnerMessage: IWinnerMessage[];
   round: number;
   lastEvaluation: IEvaluation;
 }> = ({
-  currentWinnerMessage,
   evaluations,
   players,
   leastRatedEvaluation,
@@ -123,18 +128,11 @@ const DetailsPage: NextPage<{
   lastEvaluation,
   round,
 }) => {
-  const currentMessage = currentWinnerMessage[0];
-
   return (
     <>
       <Head>
         <title>Detalhes</title>
       </Head>
-
-      <Banner>
-        &#34;{currentMessage.message}&#34; - {currentMessage.owner?.nickname},{" "}
-        {new Date().getFullYear()}
-      </Banner>
 
       <Main>
         <Nav path="/details" />
@@ -177,35 +175,22 @@ const DetailsPage: NextPage<{
           </Table>
         </Section>
 
-        {/* <Section>
-          <h2>Jogadores</h2>
+        <Section>
+          <h3>Participantes</h3>
 
-          <br />
-
-          {players.map((player) => {
-            return (
-              <React.Fragment key={player.id}>
-                <h3>{player.name}</h3>
-
-                <Table>
-                  {player.evaluations.map((evaluation) => {
-                    return (
-                      <tr key={evaluation.id}>
-                        <td>{evaluation.evaluation?.title}</td>
-
-                        <td>
-                          <strong>{evaluation.score}</strong>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </Table>
-
-                <br />
-              </React.Fragment>
-            );
-          })}
-        </Section> */}
+          <Players>
+            {players.map((player) => {
+              return (
+                <Player
+                  href={`/${player.name.toLowerCase().split(" ").join("")}`}
+                  key={player.id}
+                >
+                  {getPlayerName(player.name, player.nickname)}
+                </Player>
+              );
+            })}
+          </Players>
+        </Section>
       </Main>
     </>
   );

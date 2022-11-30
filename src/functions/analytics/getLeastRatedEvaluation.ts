@@ -1,6 +1,6 @@
-import { Player as IPlayer } from "../graphql/schema";
+import { Player as IPlayer } from "../../graphql/schema";
 
-export function getMostRatedEvaluationId(players: IPlayer[]) {
+export function getLeastRatedEvaluationId(players: IPlayer[]) {
   const map = new Map<string, number>();
 
   for (const player of players) {
@@ -23,10 +23,9 @@ export function getMostRatedEvaluationId(players: IPlayer[]) {
   map.forEach((v, k) => {
     values[`${k}`] = v;
   });
-
-  const mostRatedEvaluationId = Object.keys(values).reduce((a, b) =>
-    values[a] > values[b] ? a : b
+  const leastRatedEvaluationId = Object.keys(values).reduce((a, b) =>
+    values[a] < values[b] ? a : b
   );
 
-  return mostRatedEvaluationId;
+  return leastRatedEvaluationId;
 }

@@ -1,6 +1,6 @@
+import { getPlayerScore } from "../functions/analytics/getPlayerScore";
 import { Player as IPlayer } from "../graphql/schema";
 import { styled } from "../stitches/config";
-import { getPlayerScore } from "../utils/getPlayerScore";
 import { Player } from "./Player";
 
 const Container = styled("section", {

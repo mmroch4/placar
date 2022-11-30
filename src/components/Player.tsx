@@ -1,5 +1,6 @@
 import { blueA, crimsonA, redA, yellowA } from "@radix-ui/colors";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import { getPlayerName } from "../functions/getPlayerName";
 import { styled } from "../stitches/config";
 
 const Container = styled("div", {
@@ -162,8 +163,6 @@ export const Player = ({
   position,
   averageScore,
 }: Props) => {
-  const [firstName, lastName] = name.split(" ");
-
   let color: "blue" | "yellow" | "red" | "crimson" = "blue";
   let comment: string = "";
 
@@ -212,9 +211,7 @@ export const Player = ({
           </TooltipPrimitive.Root>
         </TooltipPrimitive.Provider>
 
-        <Name>
-          {firstName} &#34;{nickname}&#34; {lastName}
-        </Name>
+        <Name>{getPlayerName(name, nickname)}</Name>
       </InnerContainer>
     </Container>
   );
