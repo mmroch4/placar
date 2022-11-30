@@ -37,7 +37,7 @@ const Table = styled("table", {
 
 const Archives = styled("div", {
   display: "flex",
-  flexDirection: "row",
+  flexDirection: "column",
   gap: "1rem",
 
   marginBlock: "0.5rem",
