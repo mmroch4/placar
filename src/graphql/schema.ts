@@ -5269,7 +5269,7 @@ export type GetEvaluationLazyQueryHookResult = ReturnType<typeof useGetEvaluatio
 export type GetEvaluationQueryResult = Apollo.QueryResult<GetEvaluationQuery, GetEvaluationQueryVariables>;
 export const GetEvaluationsDocument = gql`
     query GetEvaluations {
-  evaluations(orderBy: publishedAt_DESC) {
+  evaluations(orderBy: publishedAt_DESC, first: 1000) {
     id
     title
     subject
@@ -5312,7 +5312,7 @@ export const GetPlayersDocument = gql`
     name
     nickname
     publishedAt
-    evaluations {
+    evaluations(first: 1000) {
       score
       id
       evaluation {
