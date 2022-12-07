@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -26,10 +27,10 @@ const Table = styled("table", {
 
   borderCollapse: "collapse",
 
-  td: {
+  "td, th": {
     paddingBlock: "0.5rem",
 
-    "&:nth-child(2)": {
+    "&:nth-child(4)": {
       textAlign: "right",
     },
   },
@@ -118,25 +119,49 @@ const PlayerPage: NextPage<{ player: IPlayer }> = ({ player }) => {
         <h1>{getPlayerName(player.name, player.nickname)}</h1>
 
         <Section>
-          <h3>Geral</h3>
+          <h3>Avaliações</h3>
 
           <Table>
-            <tr>
-              <td>Dummy</td>
+            <thead>
+              <tr>
+                <th>Nome</th>
 
-              <td>
-                <strong>Text</strong>
-              </td>
-            </tr>
+                <th>Matéria</th>
+
+                <th>Feito em</th>
+
+                <th>Nota</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {[...player.evaluations]
+                .sort((a, b) => {
+                  return (
+                    new Date(b.evaluation?.madeIn).getTime() -
+                    new Date(a.evaluation?.madeIn).getTime()
+                  );
+                })
+                .map((evaluation) => {
+                  return (
+                    <tr key={evaluation.id}>
+                      <td>{evaluation.evaluation?.title}</td>
+
+                      <td>{evaluation.evaluation?.subject}</td>
+
+                      <td>
+                        {format(
+                          new Date(evaluation.evaluation?.madeIn),
+                          "d'/'M'/'u"
+                        )}
+                      </td>
+
+                      <td>{evaluation.score}</td>
+                    </tr>
+                  );
+                })}
+            </tbody>
           </Table>
-        </Section>
-
-        <Section>
-          <h3>Arquivos</h3>
-
-          <Archives>
-            <Archive href="#">Dummy File</Archive>
-          </Archives>
         </Section>
       </Main>
     </>
