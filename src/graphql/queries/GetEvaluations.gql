@@ -1,5 +1,5 @@
 query GetEvaluations {
-  evaluations(orderBy: publishedAt_DESC) {
+  evaluations(orderBy: publishedAt_DESC, first: 1000) {
     id
     title
     subject
