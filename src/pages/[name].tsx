@@ -1,7 +1,6 @@
 import { format } from "date-fns";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { Main } from "../components/Main";
 import { Nav } from "../components/Nav";
@@ -20,38 +19,29 @@ const Section = styled("section", {
   textAlign: "left",
 });
 
+const Title = styled("h1", {
+  textAlign: "center",
+});
+
 const Table = styled("table", {
   width: "100%",
+  minWidth: "500px",
 
   marginBlock: "0.5rem",
 
   borderCollapse: "collapse",
 
   "td, th": {
-    paddingBlock: "0.5rem",
+    padding: "0.5rem",
 
-    "&:nth-child(4)": {
-      textAlign: "right",
-    },
+    borderBottom: "1px solid $gray7",
   },
 });
 
-const Archives = styled("div", {
-  display: "flex",
-  flexDirection: "column",
-  gap: "1rem",
+const Scrollable = styled("div", {
+  width: "100%",
 
-  marginBlock: "0.5rem",
-});
-
-const Archive = styled(Link, {
-  color: "$gray12",
-
-  textDecoration: "none",
-
-  "&:hover": {
-    textDecoration: "underline",
-  },
+  overflowX: "scroll",
 });
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -116,52 +106,54 @@ const PlayerPage: NextPage<{ player: IPlayer }> = ({ player }) => {
       <Main>
         <Nav />
 
-        <h1>{getPlayerName(player.name, player.nickname)}</h1>
+        <Title>{getPlayerName(player.name, player.nickname)}</Title>
 
         <Section>
           <h3>Avaliações</h3>
 
-          <Table>
-            <thead>
-              <tr>
-                <th>Nome</th>
+          <Scrollable>
+            <Table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
 
-                <th>Matéria</th>
+                  <th>Matéria</th>
 
-                <th>Feito em</th>
+                  <th>Feito em</th>
 
-                <th>Nota</th>
-              </tr>
-            </thead>
+                  <th>Nota</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {[...player.evaluations]
-                .sort((a, b) => {
-                  return (
-                    new Date(b.evaluation?.madeIn).getTime() -
-                    new Date(a.evaluation?.madeIn).getTime()
-                  );
-                })
-                .map((evaluation) => {
-                  return (
-                    <tr key={evaluation.id}>
-                      <td>{evaluation.evaluation?.title}</td>
+              <tbody>
+                {[...player.evaluations]
+                  .sort((a, b) => {
+                    return (
+                      new Date(b.evaluation?.madeIn).getTime() -
+                      new Date(a.evaluation?.madeIn).getTime()
+                    );
+                  })
+                  .map((evaluation) => {
+                    return (
+                      <tr key={evaluation.id}>
+                        <td>{evaluation.evaluation?.title}</td>
 
-                      <td>{evaluation.evaluation?.subject}</td>
+                        <td>{evaluation.evaluation?.subject}</td>
 
-                      <td>
-                        {format(
-                          new Date(evaluation.evaluation?.madeIn),
-                          "d'/'M'/'u"
-                        )}
-                      </td>
+                        <td>
+                          {format(
+                            new Date(evaluation.evaluation?.madeIn),
+                            "d'/'M'/'u"
+                          )}
+                        </td>
 
-                      <td>{evaluation.score}</td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </Table>
+                        <td>{evaluation.score}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </Table>
+          </Scrollable>
         </Section>
       </Main>
     </>

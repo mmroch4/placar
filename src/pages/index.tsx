@@ -21,24 +21,15 @@ export const getStaticProps: GetStaticProps = async () => {
     query: GetPlayersDocument,
   });
 
-  const {
-    data: { winnerMessages: currentWinnerMessage },
-  } = await client.query<IGetCurrentWinnerMessageQuery>({
-    query: GetCurrentWinnerMessageDocument,
-  });
-
   return {
-    props: { players, currentWinnerMessage },
+    props: { players },
     revalidate: 60 * 10, // 10 minutes
   };
 };
 
 const HomePage: NextPage<{
   players: IPlayer[];
-  currentWinnerMessage: IWinnerMessage[];
-}> = ({ players, currentWinnerMessage }) => {
-  const currentMessage = currentWinnerMessage[0];
-
+}> = ({ players }) => {
   return (
     <>
       <Head>
