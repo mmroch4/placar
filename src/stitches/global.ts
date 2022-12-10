@@ -25,7 +25,7 @@ export const GlobalStyles = globalCss({
   },
   "::-webkit-scrollbar": {
     border: "none",
-    width: "0.45rem",
+    width: "0.2rem",
     background: "transparent",
   },
   "::-webkit-scrollbar-thumb": {
