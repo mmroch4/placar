@@ -109,7 +109,7 @@ const PlayerPage: NextPage<{ player: IPlayer }> = ({ player }) => {
         <Title>{getPlayerName(player.name, player.nickname)}</Title>
 
         <Section>
-          <h3>Avaliações</h3>
+          <h3>Avaliações ({player.evaluations.length})</h3>
 
           <Scrollable>
             <Table>
